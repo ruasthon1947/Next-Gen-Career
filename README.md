@@ -28,3 +28,38 @@ Continue building your app on:
 2. Deploy your chats from the v0 interface
 3. Changes are automatically pushed to this repository
 4. Vercel deploys the latest version from this repository
+
+# Career Advisor Website
+
+This repository contains the source code for the Career Advisor Website. The project is configured to be deployed using GitHub Pages.
+
+## Deployment on GitHub Pages
+
+To deploy this project on GitHub Pages, follow these steps:
+
+1. **Build the Project**:
+   Ensure you have Node.js installed. Run the following commands to install dependencies and build the project:
+   ```bash
+   npm install
+   npm run build
+   npm run export
+   ```
+   This will generate a `out/` folder containing the static files for deployment.
+
+2. **Push to GitHub Pages**:
+   - Move the contents of the `out/` folder to the `gh-pages` branch or configure GitHub Pages to use the `out/` folder in the `main` branch.
+   - Commit and push the changes:
+     ```bash
+     git add .
+     git commit -m "Deploy to GitHub Pages"
+     git push origin gh-pages
+     ```
+
+3. **Configure GitHub Pages**:
+   - Go to your repository settings on GitHub.
+   - Under the "Pages" section, set the source to the `gh-pages` branch or the `out/` folder in the `main` branch.
+
+## Notes
+
+- This project was initially configured for deployment on Vercel. To avoid interference, ensure that the Vercel configuration is removed or ignored if deploying on GitHub Pages.
+- For more details on exporting a Next.js project, refer to the [Next.js documentation](https://nextjs.org/docs/advanced-features/static-html-export).
