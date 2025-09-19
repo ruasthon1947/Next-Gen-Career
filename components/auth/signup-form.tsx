@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 import { useRouter } from "next/navigation"
 import { auth, db } from "@/lib/firebase"
@@ -73,6 +74,20 @@ export function SignupForm() {
     })
   }
 
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true)
+    try {
+      const provider = new GoogleAuthProvider()
+      await signInWithPopup(auth, provider)
+      router.push("/dashboard")
+    } catch (err: any) {
+      console.error("Google Sign-In Error:", err)
+      alert(err.message || "Google sign-in failed. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <Card className="border-border/50">
       <CardHeader className="space-y-4">
@@ -81,6 +96,7 @@ export function SignupForm() {
             variant="outline"
             className="w-full hover:bg-secondary/10 transition-colors duration-200 bg-transparent"
             type="button"
+            onClick={handleGoogleSignIn}
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path

@@ -21,28 +21,28 @@ function HeaderComponent() {
         <div className="flex items-center space-x-2 min-w-0">
           <Link href="/" className="flex items-center space-x-2 min-w-0">
             <Image src="/nextgen.jpeg" alt="Next Gen Careers Logo" width={36} height={48} className="h-12 w-9 rounded-full object-cover" style={{ borderRadius: '48% 48% 60% 60% / 60% 60% 48% 48%' }} priority={true} />
-            <span className="text-xl brand-font truncate max-w-[120px] sm:max-w-none"><span className="font-bold">Next Gen</span> Careers</span>
+            <span className="text-lg sm:text-xl brand-font truncate max-w-[100px] sm:max-w-none"><span className="font-bold">Next Gen</span> Careers</span>
           </Link>
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center space-x-4 sm:space-x-5 flex-wrap">
-          <Link href="/assessment" className="text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
+        <nav className="hidden md:flex items-center space-x-3 sm:space-x-5 flex-wrap">
+          <Link href="/assessment" className="text-sm sm:text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
             Career Assessment
           </Link>
-          <Link href="/skills" className="text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
+          <Link href="/skills" className="text-sm sm:text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
             Skills
           </Link>
-          <Link href="/dashboard" className="text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
+          <Link href="/dashboard" className="text-sm sm:text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
             Dashboard
           </Link>
-          <Link href="/guidance" className="text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
+          <Link href="/guidance" className="text-sm sm:text-base font-bold text-black/90 dark:text-white/90 hover:text-primary transition-colors">
             Guidance
           </Link>
         </nav>
 
         {/* Right side: Theme, User, Mobile menu */}
-        <div className="flex items-center space-x-2 sm:space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <ThemeToggle />
           <UserAuthStatus
             fallback={
@@ -50,11 +50,11 @@ function HeaderComponent() {
                 <Button
                   asChild
                   variant="outline"
-                  className="hover:bg-secondary/80 transition-colors duration-200 bg-transparent"
+                  className="hover:bg-secondary/80 transition-colors duration-200 bg-transparent text-sm sm:text-base"
                 >
                   <Link href="/login">Sign In</Link>
                 </Button>
-                <Button asChild className="hover:bg-primary/90 transition-colors duration-200">
+                <Button asChild className="hover:bg-primary/90 transition-colors duration-200 text-sm sm:text-base">
                   <Link href="/signup">Get Started</Link>
                 </Button>
               </>
@@ -68,7 +68,7 @@ function HeaderComponent() {
             aria-label="Open menu"
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
         </div>
 
@@ -79,16 +79,16 @@ function HeaderComponent() {
             style={{ opacity: menuOpen ? 1 : 0, transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)' }}
             onClick={e => e.stopPropagation()}
           >
-            <Link href="/assessment" className="px-4 py-2 text-base font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
+            <Link href="/assessment" className="px-3 py-2 text-sm font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
               Career Assessment
             </Link>
-            <Link href="/skills" className="px-4 py-2 text-base font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
+            <Link href="/skills" className="px-3 py-2 text-sm font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
               Skills
             </Link>
-            <Link href="/dashboard" className="px-4 py-2 text-base font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
+            <Link href="/dashboard" className="px-3 py-2 text-sm font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
               Dashboard
             </Link>
-            <Link href="/guidance" className="px-4 py-2 text-base font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
+            <Link href="/guidance" className="px-3 py-2 text-sm font-bold text-black hover:bg-gray-100 transition-colors" onClick={() => setMenuOpen(false)}>
               Guidance
             </Link>
           </div>

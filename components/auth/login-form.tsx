@@ -47,6 +47,7 @@ export function LoginForm() {
       router.push("/dashboard")
     } catch (err: any) {
       setIsLoading(false)
+      console.error("Google Sign-In Error:", err)
       setError(err.message || "Google sign-in failed. Please try again.")
     }
   }
