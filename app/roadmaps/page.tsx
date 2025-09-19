@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { ProgressBar } from "@/components/ui/progress"
 import { ArrowLeft, Clock, Target, CheckCircle, Circle } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -129,7 +129,7 @@ export default function RoadmapsPage() {
         <div className="container mx-auto px-4 py-8">
           <Button variant="ghost" onClick={() => setSelectedPath(null)} className="mb-6 hover:bg-secondary/10">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Career Paths
+            Back to Career Journeys
           </Button>
 
           <div className="max-w-4xl mx-auto">
@@ -153,7 +153,7 @@ export default function RoadmapsPage() {
                   <span>Overall Progress</span>
                   <span>{Math.round(progressPercentage)}%</span>
                 </div>
-                <Progress value={progressPercentage} className="h-2" />
+                <ProgressBar value={progressPercentage} className="h-2" />
               </div>
             </div>
 

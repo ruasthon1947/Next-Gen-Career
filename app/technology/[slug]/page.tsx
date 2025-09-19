@@ -13,7 +13,7 @@ const technologies = {
     difficulty: "Beginner",
     learningTime: "2-4 weeks",
     marketDemand: "Very High",
-    averageSalary: "$45,000 - $75,000",
+
     overview:
       "HTML is the standard markup language for creating web pages. It describes the structure of a web page using markup elements like headings, paragraphs, links, images, and more.",
     keyTopics: [
@@ -26,9 +26,9 @@ const technologies = {
     prerequisites: ["Basic computer skills", "Text editor familiarity"],
     careerPaths: ["Frontend Developer", "Web Developer", "UI/UX Developer"],
     resources: [
-      { title: "MDN HTML Documentation", url: "#", type: "Documentation" },
-      { title: "HTML5 Complete Course", url: "#", type: "Course" },
-      { title: "FreeCodeCamp HTML", url: "#", type: "Interactive" },
+      { title: "MDN HTML Documentation", url: "https://developer.mozilla.org/en-US/docs/Web/HTML", type: "Documentation" },
+      { title: "HTML5 Complete Course", url: "https://www.youtube.com/watch?v=pQN-pnXPaVg", type: "Course" },
+      { title: "FreeCodeCamp HTML", url: "https://www.freecodecamp.org/learn/2022/responsive-web-design/", type: "Interactive" },
     ],
   },
   react: {
@@ -38,7 +38,7 @@ const technologies = {
     difficulty: "Intermediate",
     learningTime: "3-6 months",
     marketDemand: "Extremely High",
-    averageSalary: "$70,000 - $130,000",
+
     overview:
       "React is a JavaScript library developed by Facebook for building user interfaces. It allows developers to create reusable UI components and manage application state efficiently.",
     keyTopics: [
@@ -52,9 +52,9 @@ const technologies = {
     prerequisites: ["JavaScript ES6+", "HTML/CSS", "Basic programming concepts"],
     careerPaths: ["Frontend Developer", "Full Stack Developer", "React Developer"],
     resources: [
-      { title: "Official React Documentation", url: "#", type: "Documentation" },
-      { title: "React Complete Guide", url: "#", type: "Course" },
-      { title: "React Hooks Tutorial", url: "#", type: "Tutorial" },
+      { title: "Official React Documentation", url: "https://react.dev/", type: "Documentation" },
+      { title: "React Complete Guide", url: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/", type: "Course" },
+      { title: "React Hooks Tutorial", url: "https://www.youtube.com/watch?v=f687hBjwFcM", type: "Tutorial" },
     ],
   },
   javascript: {
@@ -64,7 +64,7 @@ const technologies = {
     difficulty: "Beginner to Advanced",
     learningTime: "3-8 months",
     marketDemand: "Extremely High",
-    averageSalary: "$60,000 - $120,000",
+
     overview:
       "JavaScript is a versatile programming language that enables interactive web pages. It's an essential part of web applications alongside HTML and CSS.",
     keyTopics: [
@@ -78,9 +78,9 @@ const technologies = {
     prerequisites: ["Basic programming logic", "HTML/CSS basics"],
     careerPaths: ["Frontend Developer", "Full Stack Developer", "JavaScript Developer"],
     resources: [
-      { title: "JavaScript.info", url: "#", type: "Tutorial" },
-      { title: "Eloquent JavaScript", url: "#", type: "Book" },
-      { title: "JavaScript30", url: "#", type: "Challenge" },
+      { title: "JavaScript.info", url: "https://javascript.info/", type: "Tutorial" },
+      { title: "Eloquent JavaScript", url: "https://eloquentjavascript.net/", type: "Book" },
+      { title: "JavaScript30", url: "https://javascript30.com/", type: "Challenge" },
     ],
   },
   css: {
@@ -131,9 +131,9 @@ const technologies = {
     prerequisites: ["JavaScript proficiency", "Object-oriented programming concepts"],
     careerPaths: ["Frontend Developer", "Full Stack Developer", "TypeScript Developer"],
     resources: [
-      { title: "TypeScript Handbook", url: "#", type: "Documentation" },
-      { title: "TypeScript Deep Dive", url: "#", type: "Book" },
-      { title: "TypeScript Exercises", url: "#", type: "Practice" },
+      { title: "TypeScript Handbook", url: "https://www.typescriptlang.org/docs/", type: "Documentation" },
+      { title: "TypeScript Deep Dive", url: "https://basarat.gitbook.io/typescript/", type: "Book" },
+      { title: "TypeScript Exercises", url: "https://typescript-exercises.github.io/", type: "Practice" },
     ],
   },
   nodejs: {
@@ -184,9 +184,9 @@ const technologies = {
     prerequisites: ["Basic programming concepts", "Command line familiarity"],
     careerPaths: ["Backend Developer", "Data Scientist", "Python Developer"],
     resources: [
-      { title: "Python.org Tutorial", url: "#", type: "Tutorial" },
-      { title: "Automate the Boring Stuff", url: "#", type: "Book" },
-      { title: "Django Documentation", url: "#", type: "Framework" },
+      { title: "Python.org Tutorial", url: "https://docs.python.org/3/tutorial/", type: "Tutorial" },
+      { title: "Automate the Boring Stuff", url: "https://automatetheboringstuff.com/", type: "Book" },
+      { title: "Django Documentation", url: "https://docs.djangoproject.com/en/stable/", type: "Framework" },
     ],
   },
   databases: {
@@ -218,9 +218,9 @@ const technologies = {
       { name: "Cassandra", description: "Distributed NoSQL database", type: "NoSQL" },
     ],
     resources: [
-      { title: "SQL Tutorial", url: "#", type: "Tutorial" },
-      { title: "MongoDB University", url: "#", type: "Course" },
-      { title: "Database Design Course", url: "#", type: "Course" },
+      { title: "SQL Tutorial", url: "https://www.w3schools.com/sql/", type: "Tutorial" },
+      { title: "MongoDB University", url: "https://university.mongodb.com/", type: "Course" },
+      { title: "Database Design Course", url: "https://www.coursera.org/learn/database-management", type: "Course" },
     ],
   },
   apis: {
@@ -244,9 +244,9 @@ const technologies = {
     prerequisites: ["HTTP protocol understanding", "Backend programming knowledge"],
     careerPaths: ["API Developer", "Backend Developer", "Integration Specialist"],
     resources: [
-      { title: "REST API Tutorial", url: "#", type: "Tutorial" },
-      { title: "GraphQL Documentation", url: "#", type: "Documentation" },
-      { title: "Postman API Testing", url: "#", type: "Tool" },
+      { title: "REST API Tutorial", url: "https://restfulapi.net/", type: "Tutorial" },
+      { title: "GraphQL Documentation", url: "https://graphql.org/learn/", type: "Documentation" },
+      { title: "Postman API Testing", url: "https://www.postman.com/api-platform/api-testing/", type: "Tool" },
     ],
   },
   devops: {
@@ -270,9 +270,9 @@ const technologies = {
     prerequisites: ["System administration", "Programming knowledge", "Networking basics"],
     careerPaths: ["DevOps Engineer", "Site Reliability Engineer", "Cloud Engineer"],
     resources: [
-      { title: "Docker Documentation", url: "#", type: "Documentation" },
-      { title: "Kubernetes Tutorial", url: "#", type: "Tutorial" },
-      { title: "AWS DevOps Guide", url: "#", type: "Guide" },
+      { title: "Docker Documentation", url: "https://docs.docker.com/", type: "Documentation" },
+      { title: "Kubernetes Tutorial", url: "https://kubernetes.io/docs/tutorials/", type: "Tutorial" },
+      { title: "AWS DevOps Guide", url: "https://aws.amazon.com/devops/", type: "Guide" },
     ],
   },
 }
@@ -294,6 +294,12 @@ export default function TechnologyPage({ params }: { params: { slug: string } })
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
+          <div className="mb-4">
+            <Link href="/skills" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/50 px-2 py-1 rounded transition bg-primary/10 hover:bg-primary/20">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Skills
+            </Link>
+          </div>
             Back to Home
           </Link>
 
@@ -323,13 +329,7 @@ export default function TechnologyPage({ params }: { params: { slug: string } })
               <div className="font-semibold">{tech.marketDemand}</div>
             </CardContent>
           </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-sm text-muted-foreground">Average Salary</div>
-              <div className="font-semibold">{tech.averageSalary}</div>
-            </CardContent>
-          </Card>
+
           <Card>
             <CardContent className="p-4 text-center">
               <BookOpen className="h-6 w-6 text-primary mx-auto mb-2" />
@@ -407,8 +407,10 @@ export default function TechnologyPage({ params }: { params: { slug: string } })
                         <div className="font-medium">{resource.title}</div>
                         <div className="text-sm text-muted-foreground">{resource.type}</div>
                       </div>
-                      <Button variant="ghost" size="sm">
-                        <ExternalLink className="h-4 w-4" />
+                      <Button asChild variant="ghost" size="sm">
+                        <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-4 w-4 mr-1" /> Start Learning
+                        </a>
                       </Button>
                     </div>
                   ))}

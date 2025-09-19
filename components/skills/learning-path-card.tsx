@@ -15,6 +15,7 @@ interface LearningPath {
   certificate: boolean
   rating: number
   students: string
+  youtube?: string
 }
 
 interface LearningPathCardProps {
@@ -82,18 +83,26 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
                 {skill}
               </Badge>
             ))}
-            {path.skills.length > 4 && (
-              <Badge variant="outline" className="text-xs">
-                +{path.skills.length - 4} more
-              </Badge>
-            )}
           </div>
         </div>
 
         <div className="flex space-x-2 pt-2">
-          <Button size="sm" className="flex-1 hover:bg-primary/90 transition-colors duration-200">
-            Start Path
-          </Button>
+          {path.youtube ? (
+            <a
+              href={path.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+            >
+              <Button size="sm" className="w-full hover:bg-primary/90 transition-colors duration-200">
+                Start Path
+              </Button>
+            </a>
+          ) : (
+            <Button size="sm" className="flex-1 hover:bg-primary/90 transition-colors duration-200">
+              Start Path
+            </Button>
+          )}
           <Button
             variant="outline"
             size="sm"

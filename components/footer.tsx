@@ -7,13 +7,10 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">C</span>
-              </div>
-              <span className="font-bold text-xl">CareerPath</span>
+              <span className="text-xl brand-font"><span className="font-bold">Next Gen</span> Careers</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              Empowering professionals to find their ideal career path and develop the right skills.
+              Empowering professionals to find their ideal career journey and develop the right skills with Next Gen Careers.
             </p>
           </div>
 
@@ -97,7 +94,7 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 CareerPath. All rights reserved.</p>
+          <p>&copy; 2024 Next Gen Careers. All rights reserved.</p>
         </div>
       </div>
     </footer>

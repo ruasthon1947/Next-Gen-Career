@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Clock, User, ArrowRight } from "lucide-react"
+import { Clock, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 interface Article {
   id: number
@@ -15,6 +16,7 @@ interface Article {
   tags: string[]
   image: string
   featured: boolean
+  externalUrl?: string
 }
 
 interface ArticleCardProps {
@@ -58,28 +60,33 @@ export function ArticleCard({ article, featured = false }: ArticleCardProps) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <User className="h-4 w-4" />
-              <span>{article.author}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Clock className="h-4 w-4" />
-              <span>{article.readTime}</span>
-            </div>
-          </div>
+        <div className="flex items-center text-sm text-muted-foreground">
+          <Clock className="h-4 w-4 mr-1" />
+          <span>{article.readTime}</span>
         </div>
 
-        <div className="space-y-2">
-          <p className="text-xs text-muted-foreground">{article.authorRole}</p>
-          <p className="text-xs text-muted-foreground">{article.publishDate}</p>
-        </div>
-
-        <Button size="sm" className="w-full hover:bg-primary/90 transition-colors duration-200 group-hover:scale-105">
-          Read Article
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        {article.externalUrl ? (
+          <a
+            href={article.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <Button size="sm" className="w-full hover:bg-primary/90 transition-colors duration-200 group-hover:scale-105">
+              Read Article
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
+        ) : (
+          <Link href={`/guidance/articles/${article.id}`} passHref legacyBehavior>
+            <Button asChild size="sm" className="w-full hover:bg-primary/90 transition-colors duration-200 group-hover:scale-105">
+              <a>
+                Read Article
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </Link>
+        )}
       </CardContent>
     </Card>
   )

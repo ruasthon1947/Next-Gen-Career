@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { ProgressBar } from "@/components/ui/progress"
 import { AssessmentQuestion } from "./assessment-question"
 import { AssessmentResults } from "./assessment-results"
 import { Brain, Target, Code, Lightbulb } from "lucide-react"
@@ -147,7 +147,7 @@ export function CareerAssessment() {
         </div>
         <h1 className="text-3xl lg:text-4xl font-bold mb-4">Career Assessment</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Discover your ideal career path through our comprehensive assessment. Answer honestly to get personalized
+          Discover your ideal career journey through our comprehensive assessment. Answer honestly to get personalized
           recommendations.
         </p>
       </div>
@@ -159,7 +159,7 @@ export function CareerAssessment() {
             {currentQuestion + 1} of {assessmentQuestions.length}
           </span>
         </div>
-        <Progress value={progress} className="h-2" />
+  <ProgressBar value={progress} className="h-2" />
       </div>
 
       <Card className="border-border/50">

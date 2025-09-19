@@ -3,7 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { ProgressBar } from "@/components/ui/progress"
+import { markSkillStarted } from "@/lib/userSkills"
+import { toast } from "sonner"
+import { useState } from "react"
 import { Clock, Users, TrendingUp, BookOpen } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -14,12 +17,13 @@ interface Skill {
   difficulty: string
   demand: string
   growth: string
-  avgSalary: string
+
   description: string
   courses: number
   learners: string
   timeToLearn: string
   prerequisites: string[]
+  youtube?: string
 }
 
 interface SkillCardProps {
@@ -28,6 +32,7 @@ interface SkillCardProps {
 
 export function SkillCard({ skill }: SkillCardProps) {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
   const getResourceUrl = (skillName: string) => {
     const skillMap: { [key: string]: string } = {
@@ -41,9 +46,24 @@ export function SkillCard({ skill }: SkillCardProps) {
     return skillMap[skillName] || skillName.toLowerCase().replace(/\s+/g, "-")
   }
 
-  const handleStartLearning = () => {
+  const handleStartLearning = async () => {
+    setLoading(true)
     const resourcePath = getResourceUrl(skill.name)
-    router.push(`/resources/${resourcePath}`)
+    try {
+      await markSkillStarted(resourcePath)
+      toast.success("Skill enrolled! Redirecting to resources...")
+      setTimeout(() => {
+        router.push(`/resources/${resourcePath}`)
+      }, 700)
+    } catch (err) {
+      toast.error(
+        err === 'No user'
+          ? 'You must be logged in to start learning this skill.'
+          : 'An error occurred. Please try again.'
+      )
+    } finally {
+      setLoading(false)
+    }
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -75,8 +95,8 @@ export function SkillCard({ skill }: SkillCardProps) {
   }
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-border/50">
-      <CardHeader className="space-y-3">
+  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 border-border/50 h-[480px] w-full min-w-[350px] max-w-[440px] flex flex-col mx-auto overflow-hidden">
+  <CardHeader className="space-y-3 overflow-hidden">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <CardTitle className="text-xl group-hover:text-primary transition-colors">{skill.name}</CardTitle>
@@ -93,7 +113,7 @@ export function SkillCard({ skill }: SkillCardProps) {
         <p className="text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+  <CardContent className="space-y-4 flex-1 flex flex-col justify-between overflow-hidden pb-4 pt-2">
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div className="flex items-center space-x-2">
             <Clock className="h-4 w-4 text-muted-foreground" />
@@ -107,10 +127,7 @@ export function SkillCard({ skill }: SkillCardProps) {
             <BookOpen className="h-4 w-4 text-muted-foreground" />
             <span>{skill.courses} courses</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            <span>{skill.avgSalary}</span>
-          </div>
+
         </div>
 
         <div className="space-y-2">
@@ -118,7 +135,7 @@ export function SkillCard({ skill }: SkillCardProps) {
             <span>Market Demand</span>
             <span className="font-medium">{skill.demand}</span>
           </div>
-          <Progress value={getDemandProgress(skill.demand)} className="h-2" />
+          <ProgressBar value={getDemandProgress(skill.demand)} className="h-2" />
         </div>
 
         <div className="space-y-2">
@@ -140,20 +157,15 @@ export function SkillCard({ skill }: SkillCardProps) {
           )}
         </div>
 
-        <div className="flex space-x-2 pt-2">
+        <div className="flex flex-col gap-2 pt-2 mt-auto">
           <Button
             size="sm"
-            className="flex-1 hover:bg-primary/90 transition-colors duration-200"
+            className="w-full hover:bg-primary/90 transition-colors duration-200 truncate"
             onClick={handleStartLearning}
+            disabled={loading}
+            style={{ minHeight: 36 }}
           >
-            Start Learning
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="hover:bg-secondary/10 transition-colors duration-200 bg-transparent"
-          >
-            Save
+            {loading ? 'Processing...' : 'Start Learning'}
           </Button>
         </div>
       </CardContent>

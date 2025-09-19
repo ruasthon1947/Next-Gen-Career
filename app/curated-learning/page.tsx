@@ -45,7 +45,7 @@ const learningProcess = [
   {
     step: "1",
     title: "Assessment & Goal Setting",
-    description: "Complete our career assessment to identify your strengths, interests, and target career path.",
+  description: "Complete our career assessment to identify your strengths, interests, and target career journey.",
   },
   {
     step: "2",

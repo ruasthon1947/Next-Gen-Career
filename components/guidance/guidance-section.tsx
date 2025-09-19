@@ -22,19 +22,21 @@ const articles = [
     tags: ["Job Search", "Tech Industry", "Career Change"],
     image: "/tech-job-interview.jpg",
     featured: true,
+    externalUrl: "https://medium.com/%40lehenetudor/breaking-into-the-tech-industry-a-guide-to-landing-your-first-job-as-a-developer-what-tech-5b76032380d2",
   },
   {
     id: 2,
     title: "Frontend vs Backend: Which Path Should You Choose?",
-    excerpt: "Compare career paths, skills, and opportunities in frontend and backend development",
+    excerpt: "Compare career journeys, skills, and opportunities in frontend and backend development",
     author: "Mike Rodriguez",
     authorRole: "Full Stack Developer at Microsoft",
     publishDate: "March 8, 2024",
     readTime: "6 min read",
-    category: "Career Paths",
+    category: "Career Journeys",
     tags: ["Frontend", "Backend", "Career Decision"],
     image: "/frontend-backend-development.jpg",
     featured: false,
+    externalUrl: "https://www.geeksforgeeks.org/blogs/frontend-vs-backend-which-one-should-i-choose/"
   },
   {
     id: 3,
@@ -48,6 +50,7 @@ const articles = [
     tags: ["Portfolio", "Projects", "Personal Branding"],
     image: "/developer-portfolio.png",
     featured: true,
+    externalUrl: "https://tietalent.com/en/blog/220/beyond-the-ats-how-to-build-a-tech-portfolio?utm_",
   },
   {
     id: 4,
@@ -61,6 +64,7 @@ const articles = [
     tags: ["Interviews", "Coding", "Problem Solving"],
     image: "/technical-interview-coding.png",
     featured: false,
+    externalUrl: "https://www.freecodecamp.org/news/master-technical-interviews?utm_",
   },
   {
     id: 5,
@@ -74,6 +78,7 @@ const articles = [
     tags: ["AI", "Machine Learning", "Future of Work"],
     image: "/ai-software-development.png",
     featured: false,
+    externalUrl: "https://lightweightsolutions.co/how-ai-is-transforming-software-development-trends-and-tools/?utm_",
   },
   {
     id: 6,
@@ -87,6 +92,7 @@ const articles = [
     tags: ["Remote Work", "Productivity", "Work-Life Balance"],
     image: "/remote-work-developer-setup.jpg",
     featured: false,
+    externalUrl: "https://www.wearedevelopers.com/en/magazine/558/mastering-remote-work-tips-for-developers-558?utm_",
   },
 ]
 
@@ -98,7 +104,7 @@ const successStories = [
     currentRole: "Frontend Developer at Spotify",
     timeframe: "8 months",
     story:
-      "After feeling unfulfilled in marketing, I discovered my passion for coding through CareerPath's assessment. The structured learning path and mentorship helped me transition successfully.",
+  "After feeling unfulfilled in marketing, I discovered my passion for coding through Next Gen Careers' assessment. The structured learning path and mentorship helped me transition successfully.",
     skills: ["React", "JavaScript", "CSS"],
     image: "/professional-woman-developer.png",
   },
@@ -129,7 +135,7 @@ const successStories = [
 const categories = [
   "All",
   "Career Advice",
-  "Career Paths",
+  "Career Journeys",
   "Portfolio",
   "Interview Prep",
   "Technology Trends",
@@ -149,12 +155,12 @@ export function GuidanceSection() {
     return matchesSearch && matchesCategory
   })
 
-  const featuredArticles = articles.filter((article) => article.featured)
+  // const featuredArticles = articles.filter((article) => article.featured)
 
   return (
     <div className="container mx-auto px-4 max-w-7xl">
       <div className="text-center mb-8">
-        <h1 className="text-3xl lg:text-4xl font-bold mb-4">Career Guidance Hub</h1>
+  <h1 className="text-3xl lg:text-4xl font-bold mb-4">Career Guidance Hub</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Expert insights, success stories, and practical advice to accelerate your career growth
         </p>
@@ -191,32 +197,15 @@ export function GuidanceSection() {
       </div>
 
       <Tabs defaultValue="articles" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:grid-cols-3">
+        <TabsList className="w-full lg:w-auto">
           <TabsTrigger value="articles" className="flex items-center space-x-2">
             <BookOpen className="h-4 w-4" />
             <span>Articles</span>
           </TabsTrigger>
-          <TabsTrigger value="success" className="flex items-center space-x-2">
-            <Star className="h-4 w-4" />
-            <span>Success Stories</span>
-          </TabsTrigger>
-          <TabsTrigger value="trending" className="flex items-center space-x-2">
-            <TrendingUp className="h-4 w-4" />
-            <span>Trending</span>
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="articles" className="space-y-8">
-          {featuredArticles.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-6">Featured Articles</h2>
-              <div className="grid lg:grid-cols-2 gap-6 mb-8">
-                {featuredArticles.map((article) => (
-                  <ArticleCard key={article.id} article={article} featured />
-                ))}
-              </div>
-            </div>
-          )}
+
 
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -230,36 +219,6 @@ export function GuidanceSection() {
                 <ArticleCard key={article.id} article={article} />
               ))}
             </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="success" className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Success Stories</h2>
-            <Badge variant="secondary" className="text-sm">
-              {successStories.length} stories
-            </Badge>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-6">
-            {successStories.map((story) => (
-              <SuccessStoryCard key={story.id} story={story} />
-            ))}
-          </div>
-        </TabsContent>
-
-        <TabsContent value="trending" className="space-y-6">
-          <div className="text-center py-12">
-            <div className="p-4 rounded-full bg-primary/10 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-              <TrendingUp className="h-8 w-8 text-primary" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Trending Content</h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              Discover the most popular articles and topics based on community engagement and current industry trends.
-            </p>
-            <Button className="hover:bg-primary/90 transition-colors duration-200">
-              <Users className="h-4 w-4 mr-2" />
-              Join Community
-            </Button>
           </div>
         </TabsContent>
       </Tabs>

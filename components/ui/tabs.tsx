@@ -1,66 +1,88 @@
-'use client'
 
-import * as React from 'react'
-import * as TabsPrimitive from '@radix-ui/react-tabs'
 
-import { cn } from '@/lib/utils'
+import * as React from "react"
 
-function Tabs({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
-  return (
-    <TabsPrimitive.Root
-      data-slot="tabs"
-      className={cn('flex flex-col gap-2', className)}
-      {...props}
-    />
-  )
+type TabsProps = {
+	defaultValue?: string
+	value?: string
+	onValueChange?: (value: string) => void
+	className?: string
+	children: React.ReactNode
 }
 
-function TabsList({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
-  return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      className={cn(
-        'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]',
-        className,
-      )}
-      {...props}
-    />
-  )
+export function Tabs({ defaultValue, value, onValueChange, className, children }: TabsProps) {
+	const [internalValue, setInternalValue] = React.useState(defaultValue || "")
+	const currentValue = value !== undefined ? value : internalValue
+	const handleChange = (val: string) => {
+		setInternalValue(val)
+		onValueChange?.(val)
+	}
+	return (
+		<div className={className}>
+					{React.Children.map(children, (child) => {
+						if (React.isValidElement(child) && child.type === TabsList) {
+							return React.cloneElement(child, { value: currentValue, onValueChange: handleChange })
+						}
+						if (
+							React.isValidElement(child) &&
+							(child as React.ReactElement<any, any>).props.value === currentValue
+						) {
+							return child
+						}
+						return null
+					})}
+		</div>
+	)
 }
 
-function TabsTrigger({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-  return (
-    <TabsPrimitive.Trigger
-      data-slot="tabs-trigger"
-      className={cn(
-        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      {...props}
-    />
-  )
+type TabsListProps = {
+	children: React.ReactNode
+	value?: string
+	onValueChange?: (value: string) => void
+	className?: string
+}
+export function TabsList({ children, value, onValueChange, className }: TabsListProps) {
+	return (
+		<div className={className}>
+			{React.Children.map(children, (child) => {
+				if (React.isValidElement(child) && child.type === TabsTrigger) {
+					return React.cloneElement(child, {
+						selected: child.props.value === value,
+						onSelect: () => onValueChange?.(child.props.value),
+					})
+				}
+				return child
+			})}
+		</div>
+	)
 }
 
-function TabsContent({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Content>) {
-  return (
-    <TabsPrimitive.Content
-      data-slot="tabs-content"
-      className={cn('flex-1 outline-none', className)}
-      {...props}
-    />
-  )
+type TabsTriggerProps = {
+	value: string
+	children: React.ReactNode
+	selected?: boolean
+	onSelect?: () => void
+	className?: string
+}
+export function TabsTrigger({ value, children, selected, onSelect, className }: TabsTriggerProps) {
+	return (
+		<button
+			type="button"
+			className={className + (selected ? " aria-selected" : "")}
+			aria-selected={selected}
+			onClick={onSelect}
+		>
+			{children}
+		</button>
+	)
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+type TabsContentProps = {
+	value: string
+	children: React.ReactNode
+	className?: string
+}
+export function TabsContent({ value, children, className }: TabsContentProps) {
+	return <div className={className}>{children}</div>
+}
+

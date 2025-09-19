@@ -68,11 +68,6 @@ export function MentorCard({ mentor, onBookSession }: MentorCardProps) {
                 {skill}
               </Badge>
             ))}
-            {mentor.expertise.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{mentor.expertise.length - 3}
-              </Badge>
-            )}
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+import { ProgressBar } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Circle, Clock, ArrowRight } from "lucide-react"
 
@@ -120,7 +120,7 @@ export function CareerRoadmap() {
                       <span>Progress</span>
                       <span>{step.progress}%</span>
                     </div>
-                    <Progress value={step.progress} className="h-2" />
+                    <ProgressBar value={step.progress} className="h-2" />
                   </div>
                 )}
 

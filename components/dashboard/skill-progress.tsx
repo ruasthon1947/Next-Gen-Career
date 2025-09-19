@@ -1,145 +1,174 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { TrendingUp, Target, BookOpen } from "lucide-react"
-
-const skillsData = [
-  {
-    name: "React",
-    level: "Intermediate",
-    progress: 75,
-    totalHours: 45,
-    completedProjects: 3,
-    nextMilestone: "Advanced Patterns",
-  },
-  {
-    name: "JavaScript",
-    level: "Advanced",
-    progress: 90,
-    totalHours: 80,
-    completedProjects: 8,
-    nextMilestone: "Performance Optimization",
-  },
-  {
-    name: "TypeScript",
-    level: "Beginner",
-    progress: 35,
-    totalHours: 15,
-    completedProjects: 1,
-    nextMilestone: "Interface Design",
-  },
-  {
-    name: "CSS/Tailwind",
-    level: "Intermediate",
-    progress: 65,
-    totalHours: 30,
-    completedProjects: 4,
-    nextMilestone: "Animation Techniques",
-  },
-  {
-    name: "Git & GitHub",
-    level: "Intermediate",
-    progress: 70,
-    totalHours: 20,
-    completedProjects: 6,
-    nextMilestone: "Advanced Workflows",
-  },
-  {
-    name: "Testing",
-    level: "Beginner",
-    progress: 25,
-    totalHours: 8,
-    completedProjects: 0,
-    nextMilestone: "Unit Testing Basics",
-  },
-]
+import { ProgressBar } from "@/components/ui/progress"
+import { useEffect, useState } from "react"
+import { getEnrolledSkills, unenrollSkill } from "@/lib/userSkills"
+import { resourcesData } from "@/lib/resourcesData"
+import { setDoc, doc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore"
+import { db, auth } from "@/lib/firebase"
+import { useRouter } from "next/navigation";
 
 export function SkillProgress() {
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case "Beginner":
-        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
-      case "Intermediate":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
-      case "Advanced":
-        return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+  const [skills, setSkills] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [removing, setRemoving] = useState<string | null>(null);
+  const [resourceProgress, setResourceProgress] = useState<Record<string, { completed: number, total: number }>>({});
+  const router = useRouter();
+
+  const fetchSkills = async () => {
+    setLoading(true);
+    const data = await getEnrolledSkills() as any[];
+    setSkills(data);
+
+    // Get current user UID
+    const user = auth.currentUser;
+    if (!user) {
+      setResourceProgress({});
+      setLoading(false);
+      return;
     }
-  }
+
+    // Helper to count all resources, including nested ones
+    function countAllResources(resources: any[]): number {
+      return resources.reduce((acc, res) => {
+        if (Array.isArray(res.resources)) {
+          return acc + countAllResources(res.resources);
+        }
+        return acc + 1;
+      }, 0);
+    }
+
+    // For each skill, fetch completed resources
+    const progress: Record<string, { completed: number, total: number }> = {};
+    for (const skill of data) {
+      const skillId = skill.id;
+      let total = 1;
+      if (resourcesData[skillId] && Array.isArray(resourcesData[skillId].resources)) {
+        total = countAllResources(resourcesData[skillId].resources);
+      } else if (resourcesData['default'] && Array.isArray(resourcesData['default'].resources)) {
+        total = countAllResources(resourcesData['default'].resources);
+      }
+      let completed = 0;
+      try {
+        const snap = await getDocs(collection(db, 'users', user.uid, 'enrolledSkills', skillId, 'resources'));
+        completed = snap.docs.length;
+      } catch {}
+      progress[skillId] = { completed, total };
+    }
+    setResourceProgress(progress);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchSkills();
+    // eslint-disable-next-line
+  }, []);
+
+  const handleRemove = async (skillId: string) => {
+    if (!window.confirm("Are you sure you want to remove this skill?")) return;
+    setRemoving(skillId);
+    try {
+      await unenrollSkill(skillId);
+      fetchSkills();
+    } finally {
+      setRemoving(null);
+    }
+  };
+
+  // Calculate overall progress
+  let totalCompleted = 0;
+  let totalResources = 0;
+  Object.values(resourceProgress).forEach(({ completed, total }) => {
+    totalCompleted += completed;
+    totalResources += total;
+  });
+  const percent = totalResources > 0 ? Math.round((totalCompleted / totalResources) * 100) : 0;
 
   return (
     <div className="space-y-6">
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card className="border-border/50">
-          <CardContent className="p-6 text-center">
-            <TrendingUp className="h-8 w-8 text-primary mx-auto mb-2" />
-            <div className="text-2xl font-bold">8</div>
-            <div className="text-sm text-muted-foreground">Skills in Progress</div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50">
-          <CardContent className="p-6 text-center">
-            <Target className="h-8 w-8 text-secondary mx-auto mb-2" />
-            <div className="text-2xl font-bold">198</div>
-            <div className="text-sm text-muted-foreground">Total Learning Hours</div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50">
-          <CardContent className="p-6 text-center">
-            <BookOpen className="h-8 w-8 text-accent mx-auto mb-2" />
-            <div className="text-2xl font-bold">22</div>
-            <div className="text-sm text-muted-foreground">Projects Completed</div>
-          </CardContent>
-        </Card>
-      </div>
-
+  {/* debugInfo removed */}
+      {skills.length > 0 && (
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-sm font-medium">Overall Progress</span>
+            <span className="text-xs text-muted-foreground">{percent}% completed</span>
+          </div>
+          <ProgressBar value={percent} className="h-2" />
+        </div>
+      )}
       <Card className="border-border/50">
         <CardHeader>
-          <CardTitle>Skill Development Progress</CardTitle>
+          <CardTitle>Enrolled Skills</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          {skillsData.map((skill, index) => (
-            <div key={index} className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <h3 className="font-semibold">{skill.name}</h3>
-                  <Badge className={`text-xs ${getLevelColor(skill.level)}`}>{skill.level}</Badge>
+          {loading ? (
+            <div>Loading...</div>
+          ) : skills.length === 0 ? (
+            <div className="text-muted-foreground">You have not enrolled in any skills yet. Start learning a skill to see your progress here!</div>
+          ) : (
+            skills.map((skill, index) => {
+              // Only show the actual resources for this skill from resourcesData
+              const resourceList = Array.isArray(resourcesData[skill.id]?.resources)
+                ? resourcesData[skill.id].resources
+                : [];
+              const progress = {
+                completed: resourceProgress[skill.id]?.completed || 0,
+                total: resourceList.length || 1,
+              };
+              const btnCompleted = progress.completed === progress.total;
+              const handleDashboardStartLearning = async () => {
+                if (!btnCompleted) {
+                  // Mark as completed in Firestore
+                  const user = auth.currentUser;
+                  if (user) {
+                    await setDoc(
+                      doc(db, "users", user.uid, "enrolledSkills", skill.id, "resources", "0"),
+                      { completedAt: new Date().toISOString() },
+                      { merge: true }
+                    );
+                  }
+                  fetchSkills();
+                }
+                // Route to the internal resources page for this skill
+                router.push(`/resources/${skill.id}`);
+              };
+              return (
+                <div key={index} className="space-y-2">
+                  <div className="flex items-center space-x-3">
+                    <h3 className="font-semibold capitalize">{skill.id.replace(/-/g, ' ')}</h3>
+                    <Badge className="text-xs bg-primary/10 text-primary">
+                      {btnCompleted ? 'Completed' : 'Enrolled'}
+                    </Badge>
+                    <button
+                      className="ml-2 px-2 py-1 rounded bg-destructive text-white text-xs font-medium hover:bg-destructive/80 transition-colors"
+                      onClick={() => handleRemove(skill.id)}
+                      disabled={removing === skill.id}
+                    >
+                      {removing === skill.id ? 'Removing...' : 'Remove'}
+                    </button>
+                  </div>
+                  <div className="text-xs text-muted-foreground">Started: {skill.startedAt ? new Date(skill.startedAt).toLocaleDateString() : 'N/A'}</div>
+                  <div className="flex items-center gap-2 pt-2">
+                    <ProgressBar value={progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0} className="h-2 w-32" />
+                    <span className="text-xs text-muted-foreground">{progress.completed}/{progress.total} resources completed</span>
+                  </div>
+                  <div className="pt-2">
+                    <button
+                      className={`px-3 py-1 rounded bg-primary text-white text-xs font-medium hover:bg-primary/90 transition-colors`}
+                      onClick={handleDashboardStartLearning}
+                    >
+                      {btnCompleted ? 'Completed' : 'Start Learning'}
+                    </button>
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">{skill.progress}%</div>
-              </div>
-
-              <Progress value={skill.progress} className="h-2" />
-
-              <div className="grid grid-cols-3 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Hours: </span>
-                  <span className="font-medium">{skill.totalHours}h</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Projects: </span>
-                  <span className="font-medium">{skill.completedProjects}</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Next: </span>
-                  <span className="font-medium">{skill.nextMilestone}</span>
-                </div>
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="hover:bg-secondary/10 transition-colors duration-200 bg-transparent"
-              >
-                Practice {skill.name}
-              </Button>
-            </div>
-          ))}
+              );
+            })
+          )}
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { ProgressBar } from "@/components/ui/progress"
 import { Trophy, Target, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
@@ -21,7 +21,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["React", "TypeScript", "CSS", "UI/UX Design"],
       growth: "+15%",
-      salary: "$75,000 - $120,000",
+
       matchFactors: ["web-mobile", "frontend", "creative", "technical", "hands-on"],
     },
     {
@@ -30,7 +30,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["Node.js", "Python", "Databases", "API Design"],
       growth: "+12%",
-      salary: "$80,000 - $130,000",
+
       matchFactors: ["backend", "technical", "systematic", "programming", "structured"],
     },
     {
@@ -39,7 +39,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["React", "Node.js", "Databases", "DevOps"],
       growth: "+18%",
-      salary: "$85,000 - $140,000",
+
       matchFactors: ["web-mobile", "technical", "programming", "growth", "hands-on"],
     },
     {
@@ -48,7 +48,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["Python", "Machine Learning", "Statistics", "Data Visualization"],
       growth: "+22%",
-      salary: "$95,000 - $160,000",
+
       matchFactors: ["ai-ml", "analytical", "data-science", "research-driven", "data"],
     },
     {
@@ -57,7 +57,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["Security Protocols", "Penetration Testing", "Risk Assessment", "Compliance"],
       growth: "+25%",
-      salary: "$90,000 - $150,000",
+
       matchFactors: ["security", "systematic", "research-driven", "technical", "structured"],
     },
     {
@@ -66,7 +66,7 @@ function calculateCareerMatches(answers: Record<number, string>) {
       match: 0,
       skills: ["AWS", "Azure", "Docker", "Kubernetes"],
       growth: "+28%",
-      salary: "$100,000 - $170,000",
+
       matchFactors: ["cloud", "devops", "technical", "systematic", "programming"],
     },
   ]
@@ -96,7 +96,7 @@ export function AssessmentResults({ answers, onRestart }: AssessmentResultsProps
         </div>
         <h1 className="text-3xl lg:text-4xl font-bold mb-4">Your Career Matches</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Based on your assessment, here are the career paths that align best with your interests, skills, and goals.
+          Based on your assessment, here are the career journeys that align best with your interests, skills, and goals.
         </p>
       </div>
 
@@ -129,7 +129,7 @@ export function AssessmentResults({ answers, onRestart }: AssessmentResultsProps
                   <span>Career Match Score</span>
                   <span>{career.match}%</span>
                 </div>
-                <Progress value={career.match} className="h-2" />
+                <ProgressBar value={career.match} className="h-2" />
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -147,8 +147,7 @@ export function AssessmentResults({ answers, onRestart }: AssessmentResultsProps
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Salary Range</h4>
-                  <p className="text-sm text-muted-foreground">{career.salary}</p>
+
                 </div>
               </div>
 
@@ -193,7 +192,7 @@ export function AssessmentResults({ answers, onRestart }: AssessmentResultsProps
         <p className="text-sm text-muted-foreground">
           Want to explore more options?{" "}
           <Link href="/skills" className="text-primary hover:underline">
-            Browse all career paths
+            Browse all career journeys
           </Link>
         </p>
       </div>

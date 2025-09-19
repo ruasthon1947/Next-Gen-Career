@@ -16,7 +16,7 @@ const features = [
     title: "Personalized Roadmaps",
     description: "Get custom learning paths with milestones, skill recommendations, and progress tracking.",
     icon: Target,
-    onClick: "/roadmaps",
+    onClick: "/skills",
   },
   {
     title: "Guidance",

@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import url('https://fonts.googleapis.com/css2?family=Eleinto:wght@700&display=swap');
+
+.brand-font {
+  font-family: 'Eleinto', sans-serif;
+  letter-spacing: 0.5px;
+}
 
 @custom-variant dark (&:is(.dark *));
 

@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Target, Trophy, Clock, ArrowRight } from "lucide-react"
 
@@ -58,8 +58,7 @@ const careerGoals = [
     requirements: ["Complete learning path", "Build 3 projects", "Pass assessment"],
   },
   {
-    title: "Earn $75,000+ Salary",
-    description: "Achieve target salary range for frontend developers",
+
     targetDate: "December 2024",
     progress: 45,
     requirements: ["Gain experience", "Build portfolio", "Develop expertise"],

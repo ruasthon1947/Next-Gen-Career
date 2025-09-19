@@ -14,7 +14,7 @@ export function HeroSection() {
                 AI-Powered Career Guidance
               </div>
               <h1 className="text-4xl lg:text-6xl font-bold text-balance leading-tight">
-                Find the Right <span className="text-primary">Career Path</span>, Learn the Right{" "}
+                Find the Right <span className="text-primary">Career Journey</span>, Learn the Right{" "}
                 <span className="text-secondary">Skills</span>
               </h1>
               <p className="text-lg text-muted-foreground text-pretty max-w-2xl">
@@ -43,7 +43,7 @@ export function HeroSection() {
             <div className="flex items-center space-x-8 text-sm text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>10,000+ Career Paths</span>
+                <span>10,000+ Career Journeys</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
@@ -59,7 +59,7 @@ export function HeroSection() {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="/diverse-professionals-collaborating-in-modern-offi.jpg"
+                src="/diverse-professionals-collaborating-in-modern-offi.jpeg"
                 alt="Career growth and professional development"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
