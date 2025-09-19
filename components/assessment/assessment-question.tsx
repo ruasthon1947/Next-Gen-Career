@@ -28,7 +28,7 @@ export function AssessmentQuestion({ question, selectedAnswer, onAnswer }: Asses
         <Button
           key={option.id}
           variant={selectedAnswer === option.value ? "default" : "outline"}
-          className={`w-full text-left justify-start p-4 h-auto hover:scale-105 transition-all duration-200 ${
+          className={`w-full text-left justify-start p-4 h-auto hover:scale-105 transition-all duration-200 break-words overflow-hidden ${
             selectedAnswer === option.value
               ? "bg-primary text-primary-foreground"
               : "hover:bg-secondary/10 bg-transparent"
@@ -45,7 +45,7 @@ export function AssessmentQuestion({ question, selectedAnswer, onAnswer }: Asses
             >
               {selectedAnswer === option.value && <div className="w-2 h-2 rounded-full bg-primary" />}
             </div>
-            <span className="text-sm leading-relaxed">{option.text}</span>
+            <span className="text-sm leading-relaxed break-words whitespace-normal">{option.text}</span>
           </div>
         </Button>
       ))}
