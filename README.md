@@ -31,6 +31,3 @@ Clone the repository and install dependencies:
 git clone https://github.com/Torqued-codes/Next-Gen-Career.git
 cd Next-Gen-Career
 pnpm install    # or npm install
-
-- This project was initially configured for deployment on Vercel. To avoid interference, ensure that the Vercel configuration is removed or ignored if deploying on GitHub Pages.
-- For more details on exporting a Next.js project, refer to the [Next.js documentation](https://nextjs.org/docs/advanced-features/static-html-export).
