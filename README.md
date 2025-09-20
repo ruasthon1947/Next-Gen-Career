@@ -1,33 +1,29 @@
-# Next-Gen-Career
+# career-website
 
-A modern, responsive career-planning web app built with **TypeScript**, **CSS** and **JavaScript**.
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
----
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/ruasthon-1560s-projects/v0-career-website)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/J3dSEMNikRk)
 
-## ✨ Features
+## Overview
 
-- Responsive, mobile-friendly UI  
-- Built with TypeScript for safety and maintainability  
-- Clean component-based structure  
-- Custom CSS styling  
-- Easy to deploy to Vercel / Cloudflare or any Node host  
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
 
----
+## Deployment
 
-## 🛠️ Tech Stack
+Project is live at:
+https://nextgencareers.vercel.app/
 
-- [Next.js](https://nextjs.org/) (React Framework)
-- TypeScript
-- JavaScript
-- CSS (custom styles, modules)
+## Build your app
 
----
+Continue building your app on:
 
-## 📦 Installation
+**[https://v0.app/chat/projects/J3dSEMNikRk](https://v0.app/chat/projects/J3dSEMNikRk)**
 
-Clone the repository and install dependencies:
+## How It Works
 
-```bash
-git clone https://github.com/Torqued-codes/Next-Gen-Career.git
-cd Next-Gen-Career
-pnpm install    # or npm install
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
