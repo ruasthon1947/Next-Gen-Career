@@ -25,8 +25,8 @@ def search(query: str):
     Returns a one-liner answer from the first search result.
     """
     top_k_results = 1
-    search_engine_api_key = "AIzaSyDb1leS2iE_Q8OmqfZmrwaF4re8y4ZhlGc"  # <--- Add your Google API key here
-    google_cse_id = "1354eb79510fd4443"  # <--- Add your Custom Search Engine ID here
+    search_engine_api_key = ""  # <--- Add your Google API key here
+    google_cse_id = ""  # <--- Add your Custom Search Engine ID here
 
     url = "https://www.googleapis.com/customsearch/v1"
     params = {
