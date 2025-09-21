@@ -31,6 +31,6 @@ A modern, responsive career-planning web app built with **TypeScript**, **CSS** 
 
 - Clone the repository and install dependencies:
 
-i] git clone https://github.com/ruasthon1947/Next-Gen-Career.git
-ii] cd Next-Gen-Career
-iii] npm install
+- git clone https://github.com/ruasthon1947/Next-Gen-Career.git
+- cd Next-Gen-Career
+- npm install
