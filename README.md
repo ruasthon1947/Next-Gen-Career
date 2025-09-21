@@ -26,3 +26,11 @@ A modern, responsive career-planning web app built with **TypeScript**, **CSS** 
 ## 📦 Website
 
 - Website : https://nextgencareers.vercel.app/
+
+## 📦 Installation
+
+- Clone the repository and install dependencies:
+
+i] git clone https://github.com/ruasthon1947/Next-Gen-Career.git
+ii] cd Next-Gen-Career
+iii] npm install
